@@ -797,87 +797,35 @@
       box-shadow: var(--shadow-lg);
     }
 
+    /* ---- Product card visual wrapper ---- */
     .product-card-visual {
-      height: 260px;
+      height: 300px;
       position: relative;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
       overflow: hidden;
     }
 
-    /* Product card visual - Original */
-    .product-card-visual.original {
-      background: linear-gradient(145deg, #F7F3EE 0%, #F0E4D8 100%);
+    /* card hover — subtle zoom on the SVG scene */
+    .product-card:hover .product-card-visual svg {
+      transform: scale(1.03);
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
     }
-    /* Green Tea */
-    .product-card-visual.green-tea {
-      background: linear-gradient(145deg, #EFF3ED 0%, #D8E4D3 100%);
-    }
-    /* Charcoal */
-    .product-card-visual.charcoal-v {
-      background: linear-gradient(145deg, #3A3330 0%, #2A2420 100%);
+    .product-card-visual svg {
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0; left: 0;
     }
 
-    /* Mini product illustration inside card */
-    .mini-packet {
-      width: 100px;
-      height: 140px;
-      border-radius: 12px 12px 10px 10px;
-      position: relative;
-      box-shadow: 0 16px 48px rgba(42,36,32,0.2);
-    }
-    .mini-packet.original-pkt {
-      background: linear-gradient(145deg, #F7F3EE, #E8D5C4);
-    }
-    .mini-packet.original-pkt::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 45px;
-      background: linear-gradient(135deg, #8B6F4E, #B8714A);
-      border-radius: 10px 10px 0 0;
-    }
-    .mini-packet.greentea-pkt {
-      background: linear-gradient(145deg, #EFF3ED, #D8E4D3);
-    }
-    .mini-packet.greentea-pkt::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 45px;
-      background: linear-gradient(135deg, #5A7252, #7A8C6E);
-      border-radius: 10px 10px 0 0;
-    }
-    .mini-packet.charcoal-pkt {
-      background: linear-gradient(145deg, #3A3330, #2A2420);
-    }
-    .mini-packet.charcoal-pkt::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 45px;
-      background: linear-gradient(135deg, #1A1510, #2A2420);
-      border-radius: 10px 10px 0 0;
-    }
-
-    .mini-packet-name {
-      position: absolute;
-      top: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: var(--font-heading);
-      font-size: 0.72rem;
-      color: var(--warm-white);
-      white-space: nowrap;
-      z-index: 2;
-    }
-
-    /* floating dots around mini packets */
+    /* floating dots (kept for bg accent) */
     .card-dot {
       position: absolute;
       border-radius: 50%;
       opacity: 0.4;
+      pointer-events: none;
     }
 
     .product-card-tag {
@@ -1812,14 +1760,138 @@
 
         <!-- Card 1: The Original -->
         <div class="product-card reveal reveal-delay-1">
-          <div class="product-card-visual original">
-            <div class="mini-packet original-pkt">
-              <span class="mini-packet-name">Mattly</span>
-            </div>
-            <!-- Floating dots -->
-            <div class="card-dot" style="width:10px;height:10px;background:#C4A882;top:20px;right:24px;"></div>
-            <div class="card-dot" style="width:6px;height:6px;background:#8B6F4E;bottom:24px;left:20px;"></div>
-            <div class="product-card-tag tag-bestseller">Bestseller</div>
+          <div class="product-card-visual">
+            <!-- LIFESTYLE SVG: Hand holding The Original packet on a warm cream vanity -->
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <defs>
+                <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#F7F3EE"/>
+                  <stop offset="100%" stop-color="#EDD9C8"/>
+                </linearGradient>
+                <linearGradient id="pkt1top" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#8B6F4E"/>
+                  <stop offset="100%" stop-color="#B8714A"/>
+                </linearGradient>
+                <linearGradient id="pkt1body" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#F7F3EE"/>
+                  <stop offset="100%" stop-color="#E8D5C4"/>
+                </linearGradient>
+                <linearGradient id="skin1" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#D4956A"/>
+                  <stop offset="100%" stop-color="#B8724A"/>
+                </linearGradient>
+                <linearGradient id="skin1shadow" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#C07848"/>
+                  <stop offset="100%" stop-color="#9A5C32"/>
+                </linearGradient>
+                <filter id="softShadow1">
+                  <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#2A2420" flood-opacity="0.18"/>
+                </filter>
+                <filter id="glow1">
+                  <feGaussianBlur stdDeviation="3" result="blur"/>
+                  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                </filter>
+              </defs>
+
+              <!-- Background wash -->
+              <rect width="400" height="300" fill="url(#bg1)"/>
+
+              <!-- Soft ambient light blob top-right -->
+              <ellipse cx="340" cy="40" rx="90" ry="70" fill="#F0E4D8" opacity="0.6"/>
+
+              <!-- Vanity surface shadow at bottom -->
+              <ellipse cx="200" cy="285" rx="160" ry="18" fill="#C4A882" opacity="0.18"/>
+
+              <!-- ── Botanical sprig left ── -->
+              <!-- stem -->
+              <path d="M55 280 Q 60 220 72 160 Q 78 130 85 110" stroke="#A8B89C" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <!-- leaves off stem -->
+              <ellipse cx="70" cy="190" rx="12" ry="6" fill="#7A8C6E" opacity="0.55" transform="rotate(-30 70 190)"/>
+              <ellipse cx="80" cy="155" rx="10" ry="5" fill="#7A8C6E" opacity="0.5" transform="rotate(20 80 155)"/>
+              <ellipse cx="62" cy="220" rx="9" ry="4.5" fill="#A8B89C" opacity="0.45" transform="rotate(-45 62 220)"/>
+              <ellipse cx="88" cy="130" rx="8" ry="4" fill="#7A8C6E" opacity="0.4" transform="rotate(10 88 130)"/>
+
+              <!-- ── Small rose petals scattered ── -->
+              <ellipse cx="50" cy="115" rx="7" ry="5" fill="#E8B4A0" opacity="0.5" transform="rotate(20 50 115)"/>
+              <ellipse cx="340" cy="240" rx="6" ry="4" fill="#E8B4A0" opacity="0.4" transform="rotate(-15 340 240)"/>
+              <ellipse cx="360" cy="100" rx="5" ry="3.5" fill="#C4A882" opacity="0.35" transform="rotate(30 360 100)"/>
+
+              <!-- ── Mirror / compact on table ── -->
+              <ellipse cx="320" cy="252" rx="32" ry="22" fill="#E8D5C4" stroke="#C4A882" stroke-width="1"/>
+              <ellipse cx="320" cy="252" rx="26" ry="17" fill="#D4C4B0" opacity="0.7"/>
+              <!-- compact shine -->
+              <ellipse cx="312" cy="246" rx="8" ry="5" fill="white" opacity="0.25" transform="rotate(-20 312 246)"/>
+              <!-- compact hinge -->
+              <rect x="318" y="270" width="4" height="4" rx="1" fill="#B8A080"/>
+
+              <!-- ── A single blotting sheet on table ── -->
+              <rect x="55" y="255" width="75" height="52" rx="4" fill="#FDFAF7" opacity="0.85" transform="rotate(-8 55 255)" filter="url(#softShadow1)"/>
+              <!-- oil blot marks on sheet -->
+              <ellipse cx="80" cy="272" rx="10" ry="7" fill="#DCC8B0" opacity="0.4" transform="rotate(-8 80 272)"/>
+              <ellipse cx="100" cy="285" rx="7" ry="5" fill="#DCC8B0" opacity="0.3" transform="rotate(-8 100 285)"/>
+
+              <!-- ── HAND holding packet ── -->
+              <!-- Wrist / lower arm -->
+              <path d="M 155 300 Q 158 265 162 245 Q 165 230 168 215" stroke="url(#skin1)" stroke-width="26" fill="none" stroke-linecap="round"/>
+              <!-- Arm highlight -->
+              <path d="M 159 300 Q 162 265 166 248" stroke="#D4956A" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.4"/>
+
+              <!-- Palm base -->
+              <ellipse cx="174" cy="208" rx="22" ry="18" fill="url(#skin1)"/>
+
+              <!-- Thumb -->
+              <path d="M 156 212 Q 152 200 155 190 Q 158 182 164 185 Q 170 188 168 198 Q 166 208 160 212 Z" fill="url(#skin1)"/>
+              <path d="M 157 209 Q 153 200 156 192 Q 158 186 163 188" stroke="#C07848" stroke-width="0.8" fill="none" opacity="0.4"/>
+
+              <!-- Index finger -->
+              <path d="M 165 192 Q 162 178 164 165 Q 166 155 172 157 Q 178 159 178 170 Q 178 182 176 192 Z" fill="url(#skin1)"/>
+              <!-- Middle finger -->
+              <path d="M 175 190 Q 174 174 176 160 Q 178 150 184 152 Q 190 154 190 166 Q 190 180 188 192 Z" fill="url(#skin1)"/>
+              <!-- Ring finger -->
+              <path d="M 186 193 Q 186 178 188 167 Q 190 158 196 160 Q 202 162 201 173 Q 200 184 196 194 Z" fill="url(#skin1)"/>
+              <!-- Pinky -->
+              <path d="M 196 198 Q 197 186 199 177 Q 201 170 206 172 Q 211 174 210 182 Q 209 191 205 198 Z" fill="url(#skin1)"/>
+
+              <!-- Finger knuckle lines -->
+              <path d="M 167 178 Q 170 176 173 178" stroke="#C07848" stroke-width="0.8" fill="none" opacity="0.5"/>
+              <path d="M 178 176 Q 181 174 184 176" stroke="#C07848" stroke-width="0.8" fill="none" opacity="0.5"/>
+              <path d="M 189 178 Q 192 176 195 178" stroke="#C07848" stroke-width="0.8" fill="none" opacity="0.5"/>
+
+              <!-- ── THE MATTLY PACKET (Original) ── -->
+              <g filter="url(#softShadow1)" transform="rotate(-8 220 180)">
+                <!-- Packet body -->
+                <rect x="185" y="120" width="90" height="130" rx="10" fill="url(#pkt1body)"/>
+                <!-- Packet top colour band -->
+                <rect x="185" y="120" width="90" height="52" rx="10" fill="url(#pkt1top)"/>
+                <rect x="185" y="152" width="90" height="20" fill="url(#pkt1top)"/>
+                <!-- Packet top band edge highlight -->
+                <rect x="185" y="120" width="90" height="2" rx="1" fill="rgba(255,255,255,0.2)"/>
+                <!-- Logo on packet -->
+                <text x="230" y="148" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="14" fill="#FDFAF7" letter-spacing="1">Mattly</text>
+                <!-- Sub-label -->
+                <text x="230" y="158" text-anchor="middle" font-family="Arial,sans-serif" font-size="6" fill="rgba(253,250,247,0.65)" letter-spacing="2">THE ORIGINAL</text>
+                <!-- Rice paper texture lines on lower body -->
+                <line x1="196" y1="182" x2="264" y2="182" stroke="#DCC8B0" stroke-width="0.7" opacity="0.6"/>
+                <line x1="196" y1="192" x2="264" y2="192" stroke="#DCC8B0" stroke-width="0.7" opacity="0.6"/>
+                <line x1="196" y1="202" x2="264" y2="202" stroke="#DCC8B0" stroke-width="0.7" opacity="0.6"/>
+                <line x1="196" y1="212" x2="264" y2="212" stroke="#DCC8B0" stroke-width="0.7" opacity="0.5"/>
+                <!-- Sheet count badge -->
+                <rect x="205" y="222" width="50" height="18" rx="9" fill="#B8714A" opacity="0.9"/>
+                <text x="230" y="234" text-anchor="middle" font-family="Arial,sans-serif" font-size="7.5" fill="#FDFAF7" font-weight="bold" letter-spacing="0.5">50 SHEETS</text>
+                <!-- Packet side shine -->
+                <rect x="185" y="120" width="6" height="130" rx="3" fill="rgba(255,255,255,0.12)"/>
+              </g>
+
+              <!-- ── Small sprig top-right corner ── -->
+              <path d="M 370 10 Q 365 40 358 60" stroke="#A8B89C" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+              <ellipse cx="362" cy="38" rx="9" ry="4.5" fill="#7A8C6E" opacity="0.45" transform="rotate(25 362 38)"/>
+              <ellipse cx="355" cy="55" rx="8" ry="4" fill="#7A8C6E" opacity="0.4" transform="rotate(-15 355 55)"/>
+
+              <!-- Tag badge -->
+              <rect x="16" y="16" width="72" height="22" rx="11" fill="#B8714A"/>
+              <text x="52" y="31" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="#FDFAF7" letter-spacing="1">BESTSELLER</text>
+            </svg>
+            <div class="product-card-tag tag-bestseller" style="display:none;">Bestseller</div>
           </div>
           <div class="product-card-body">
             <div class="product-card-name">The Original</div>
@@ -1834,13 +1906,126 @@
 
         <!-- Card 2: The Detox / Green Tea -->
         <div class="product-card reveal reveal-delay-2">
-          <div class="product-card-visual green-tea">
-            <div class="mini-packet greentea-pkt">
-              <span class="mini-packet-name">Mattly</span>
-            </div>
-            <div class="card-dot" style="width:8px;height:8px;background:#7A8C6E;top:20px;right:24px;"></div>
-            <div class="card-dot" style="width:12px;height:12px;background:#A8B89C;bottom:24px;left:20px;opacity:0.5;"></div>
-            <div class="product-card-tag tag-new">New</div>
+          <div class="product-card-visual">
+            <!-- LIFESTYLE SVG: Hand holding The Detox packet — green-tea & botanical mood -->
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#EEF3EC"/>
+                  <stop offset="100%" stop-color="#D4E0CE"/>
+                </linearGradient>
+                <linearGradient id="pkt2top" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#4E7248"/>
+                  <stop offset="100%" stop-color="#7A8C6E"/>
+                </linearGradient>
+                <linearGradient id="pkt2body" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#EEF3EC"/>
+                  <stop offset="100%" stop-color="#D4E0CE"/>
+                </linearGradient>
+                <linearGradient id="skin2" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#C4845C"/>
+                  <stop offset="100%" stop-color="#A86840"/>
+                </linearGradient>
+                <filter id="softShadow2">
+                  <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#2A3820" flood-opacity="0.16"/>
+                </filter>
+              </defs>
+
+              <!-- Background wash — soft sage -->
+              <rect width="400" height="300" fill="url(#bg2)"/>
+
+              <!-- Ambient soft blob -->
+              <ellipse cx="60" cy="60" rx="100" ry="80" fill="#C8DCC4" opacity="0.45"/>
+              <ellipse cx="370" cy="260" rx="70" ry="55" fill="#B8CEB4" opacity="0.35"/>
+
+              <!-- Surface shadow -->
+              <ellipse cx="200" cy="286" rx="155" ry="16" fill="#7A8C6E" opacity="0.14"/>
+
+              <!-- ── Tea cup on surface (lifestyle prop) ── -->
+              <ellipse cx="58" cy="248" rx="28" ry="9" fill="#C4A882" opacity="0.5"/>
+              <!-- cup body -->
+              <path d="M 30 220 Q 30 248 58 248 Q 86 248 86 220 Z" fill="#F7F3EE" stroke="#C4A882" stroke-width="1"/>
+              <!-- cup liquid -->
+              <ellipse cx="58" cy="222" rx="22" ry="7" fill="#A8C89C" opacity="0.55"/>
+              <!-- tea steam lines -->
+              <path d="M 50 214 Q 52 208 50 202" stroke="#7A8C6E" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.5"/>
+              <path d="M 58 212 Q 60 205 58 198" stroke="#7A8C6E" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.4"/>
+              <path d="M 66 214 Q 68 207 66 200" stroke="#7A8C6E" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.45"/>
+              <!-- cup handle -->
+              <path d="M 86 226 Q 97 226 97 234 Q 97 242 86 242" stroke="#C4A882" stroke-width="1.5" fill="none"/>
+
+              <!-- ── Large botanical leaves right ── -->
+              <path d="M 380 300 Q 360 260 340 220 Q 325 190 310 175" stroke="#5A7A54" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <!-- leaf 1 -->
+              <path d="M 340 220 Q 370 210 375 225 Q 365 238 340 220 Z" fill="#7A8C6E" opacity="0.6"/>
+              <!-- leaf 2 -->
+              <path d="M 318 188 Q 348 175 352 192 Q 340 204 318 188 Z" fill="#5A7A54" opacity="0.5"/>
+              <!-- leaf 3 -->
+              <path d="M 360 248 Q 388 242 388 258 Q 374 268 360 248 Z" fill="#A8C89C" opacity="0.55"/>
+              <!-- leaf vein -->
+              <line x1="340" y1="220" x2="358" y2="222" stroke="#4E7248" stroke-width="0.7" opacity="0.5"/>
+              <line x1="318" y1="188" x2="335" y2="190" stroke="#4E7248" stroke-width="0.7" opacity="0.5"/>
+
+              <!-- ── Small scattered botanicals left-top ── -->
+              <path d="M 22 80 Q 35 65 45 72 Q 40 85 22 80 Z" fill="#7A8C6E" opacity="0.45"/>
+              <path d="M 35 55 Q 50 42 58 50 Q 52 63 35 55 Z" fill="#A8C89C" opacity="0.4"/>
+              <path d="M 15 105 Q 28 92 37 100 Q 32 112 15 105 Z" fill="#5A7A54" opacity="0.35"/>
+
+              <!-- Green tea leaves floating -->
+              <ellipse cx="320" cy="58" rx="7" ry="3.5" fill="#7A8C6E" opacity="0.4" transform="rotate(25 320 58)"/>
+              <ellipse cx="345" cy="40" rx="6" ry="3" fill="#A8C89C" opacity="0.35" transform="rotate(-10 345 40)"/>
+              <ellipse cx="298" cy="72" rx="8" ry="4" fill="#5A7A54" opacity="0.35" transform="rotate(40 298 72)"/>
+
+              <!-- ── HAND ── -->
+              <!-- Wrist -->
+              <path d="M 160 300 Q 163 265 167 248 Q 170 233 173 218" stroke="url(#skin2)" stroke-width="26" fill="none" stroke-linecap="round"/>
+              <path d="M 164 300 Q 167 265 171 248" stroke="#C4845C" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.38"/>
+              <!-- Palm -->
+              <ellipse cx="179" cy="211" rx="22" ry="18" fill="url(#skin2)"/>
+              <!-- Thumb -->
+              <path d="M 161 215 Q 157 203 160 193 Q 163 185 169 188 Q 175 191 173 201 Q 171 211 165 215 Z" fill="url(#skin2)"/>
+              <path d="M 162 212 Q 158 203 161 194 Q 163 188 168 190" stroke="#A86840" stroke-width="0.8" fill="none" opacity="0.4"/>
+              <!-- Index -->
+              <path d="M 170 195 Q 167 181 169 168 Q 171 158 177 160 Q 183 162 183 173 Q 183 185 181 195 Z" fill="url(#skin2)"/>
+              <!-- Middle -->
+              <path d="M 180 193 Q 179 177 181 163 Q 183 153 189 155 Q 195 157 195 169 Q 195 181 193 193 Z" fill="url(#skin2)"/>
+              <!-- Ring -->
+              <path d="M 191 195 Q 191 180 193 169 Q 195 160 201 162 Q 207 164 206 175 Q 205 186 201 196 Z" fill="url(#skin2)"/>
+              <!-- Pinky -->
+              <path d="M 201 201 Q 202 189 204 180 Q 206 173 211 175 Q 216 177 215 185 Q 214 194 210 201 Z" fill="url(#skin2)"/>
+              <!-- knuckle lines -->
+              <path d="M 172 181 Q 175 179 178 181" stroke="#A06030" stroke-width="0.8" fill="none" opacity="0.45"/>
+              <path d="M 183 179 Q 186 177 189 179" stroke="#A06030" stroke-width="0.8" fill="none" opacity="0.45"/>
+              <path d="M 194 180 Q 197 178 200 180" stroke="#A06030" stroke-width="0.8" fill="none" opacity="0.45"/>
+
+              <!-- ── THE MATTLY PACKET (Green Tea / Detox) ── -->
+              <g filter="url(#softShadow2)" transform="rotate(-6 225 178)">
+                <rect x="190" y="118" width="90" height="130" rx="10" fill="url(#pkt2body)"/>
+                <rect x="190" y="118" width="90" height="52" rx="10" fill="url(#pkt2top)"/>
+                <rect x="190" y="150" width="90" height="20" fill="url(#pkt2top)"/>
+                <rect x="190" y="118" width="90" height="2" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <!-- Logo -->
+                <text x="235" y="146" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="14" fill="#FDFAF7" letter-spacing="1">Mattly</text>
+                <text x="235" y="156" text-anchor="middle" font-family="Arial,sans-serif" font-size="5.5" fill="rgba(253,250,247,0.7)" letter-spacing="2">THE DETOX</text>
+                <!-- subtle leaf icon on packet -->
+                <path d="M 230 165 Q 228 170 230 174 Q 232 170 234 165 Q 232 162 230 165 Z" fill="#C8DCC4" opacity="0.6"/>
+                <!-- texture lines -->
+                <line x1="200" y1="180" x2="270" y2="180" stroke="#B8CEB4" stroke-width="0.7" opacity="0.7"/>
+                <line x1="200" y1="190" x2="270" y2="190" stroke="#B8CEB4" stroke-width="0.7" opacity="0.7"/>
+                <line x1="200" y1="200" x2="270" y2="200" stroke="#B8CEB4" stroke-width="0.7" opacity="0.6"/>
+                <line x1="200" y1="210" x2="270" y2="210" stroke="#B8CEB4" stroke-width="0.7" opacity="0.5"/>
+                <!-- badge -->
+                <rect x="210" y="220" width="50" height="18" rx="9" fill="#4E7248" opacity="0.9"/>
+                <text x="235" y="232" text-anchor="middle" font-family="Arial,sans-serif" font-size="7.5" fill="#FDFAF7" font-weight="bold" letter-spacing="0.5">50 SHEETS</text>
+                <!-- side shine -->
+                <rect x="190" y="118" width="6" height="130" rx="3" fill="rgba(255,255,255,0.15)"/>
+              </g>
+
+              <!-- Tag badge built into SVG -->
+              <rect x="16" y="16" width="42" height="22" rx="11" fill="#7A8C6E"/>
+              <text x="37" y="31" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="#FDFAF7" letter-spacing="1">NEW</text>
+            </svg>
+            <div class="product-card-tag tag-new" style="display:none;">New</div>
           </div>
           <div class="product-card-body">
             <div class="product-card-name">The Detox</div>
@@ -1855,13 +2040,140 @@
 
         <!-- Card 3: The Charcoal -->
         <div class="product-card reveal reveal-delay-3">
-          <div class="product-card-visual charcoal-v">
-            <div class="mini-packet charcoal-pkt">
-              <span class="mini-packet-name" style="color:#C4A882;">Mattly</span>
-            </div>
-            <div class="card-dot" style="width:8px;height:8px;background:#C4A882;top:20px;right:24px;opacity:0.5;"></div>
-            <div class="card-dot" style="width:14px;height:14px;background:#8B6F4E;bottom:24px;left:20px;opacity:0.3;"></div>
-            <div class="product-card-tag tag-premium">Premium</div>
+          <div class="product-card-visual">
+            <!-- LIFESTYLE SVG: Hand holding The Charcoal packet — dark moody, city skin vibes -->
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="bg3" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2E2825"/>
+                  <stop offset="100%" stop-color="#1E1A18"/>
+                </linearGradient>
+                <linearGradient id="pkt3top" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#1A1510"/>
+                  <stop offset="100%" stop-color="#2A2420"/>
+                </linearGradient>
+                <linearGradient id="pkt3body" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#2E2825"/>
+                  <stop offset="100%" stop-color="#1E1A18"/>
+                </linearGradient>
+                <linearGradient id="skin3" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#C8845A"/>
+                  <stop offset="100%" stop-color="#A8683C"/>
+                </linearGradient>
+                <linearGradient id="glow3" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#C4A882" stop-opacity="0.3"/>
+                  <stop offset="100%" stop-color="#C4A882" stop-opacity="0"/>
+                </linearGradient>
+                <filter id="softShadow3">
+                  <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity="0.35"/>
+                </filter>
+                <filter id="goldGlow">
+                  <feGaussianBlur stdDeviation="4" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+
+              <!-- Dark background -->
+              <rect width="400" height="300" fill="url(#bg3)"/>
+
+              <!-- Dramatic top-right light source -->
+              <ellipse cx="360" cy="20" rx="140" ry="100" fill="url(#glow3)"/>
+              <ellipse cx="360" cy="20" rx="70" ry="50" fill="#C4A882" opacity="0.08"/>
+
+              <!-- Ground reflection / surface -->
+              <ellipse cx="200" cy="288" rx="140" ry="14" fill="#C4A882" opacity="0.1"/>
+
+              <!-- ── Activated charcoal particles floating (mood detail) ── -->
+              <circle cx="48" cy="55" r="2.5" fill="#4A4440" opacity="0.6"/>
+              <circle cx="62" cy="38" r="1.8" fill="#5A5450" opacity="0.5"/>
+              <circle cx="35" cy="78" r="3" fill="#3A3430" opacity="0.5"/>
+              <circle cx="76" cy="48" r="1.5" fill="#4A4440" opacity="0.45"/>
+              <circle cx="355" cy="210" r="2" fill="#4A4440" opacity="0.4"/>
+              <circle cx="370" cy="185" r="3" fill="#3A3430" opacity="0.35"/>
+              <circle cx="342" cy="230" r="1.8" fill="#5A5450" opacity="0.4"/>
+
+              <!-- ── City architecture silhouette far bg ── -->
+              <rect x="0" y="175" width="400" height="130" fill="#1A1510" opacity="0.4"/>
+              <!-- building outlines -->
+              <rect x="10" y="155" width="18" height="20" fill="#1E1A18" opacity="0.6"/>
+              <rect x="32" y="148" width="14" height="27" fill="#1E1A18" opacity="0.5"/>
+              <rect x="50" y="160" width="22" height="15" fill="#1E1A18" opacity="0.5"/>
+              <rect x="330" y="158" width="16" height="17" fill="#1E1A18" opacity="0.5"/>
+              <rect x="350" y="150" width="20" height="25" fill="#1E1A18" opacity="0.6"/>
+              <rect x="374" y="162" width="26" height="13" fill="#1E1A18" opacity="0.5"/>
+
+              <!-- ── Gold/clay geometric accent circles ── -->
+              <circle cx="50" cy="240" r="28" stroke="#C4A882" stroke-width="0.8" fill="none" opacity="0.18"/>
+              <circle cx="50" cy="240" r="18" stroke="#C4A882" stroke-width="0.5" fill="none" opacity="0.12"/>
+              <circle cx="360" cy="68" r="22" stroke="#C4A882" stroke-width="0.8" fill="none" opacity="0.15"/>
+              <circle cx="360" cy="68" r="14" stroke="#B8714A" stroke-width="0.5" fill="none" opacity="0.12"/>
+
+              <!-- ── HAND (slightly lighter tone for contrast on dark bg) ── -->
+              <path d="M 155 300 Q 158 265 162 248 Q 165 233 168 218" stroke="url(#skin3)" stroke-width="27" fill="none" stroke-linecap="round"/>
+              <path d="M 159 300 Q 162 265 166 248" stroke="#C8845A" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.35"/>
+              <!-- Palm -->
+              <ellipse cx="174" cy="211" rx="22" ry="18" fill="url(#skin3)"/>
+              <!-- Thumb -->
+              <path d="M 156 215 Q 152 203 155 193 Q 158 185 164 188 Q 170 191 168 201 Q 166 211 160 215 Z" fill="url(#skin3)"/>
+              <path d="M 157 212 Q 153 203 156 194 Q 158 188 163 190" stroke="#A86840" stroke-width="0.8" fill="none" opacity="0.4"/>
+              <!-- Index -->
+              <path d="M 165 195 Q 162 181 164 168 Q 166 158 172 160 Q 178 162 178 173 Q 178 185 176 195 Z" fill="url(#skin3)"/>
+              <!-- Middle -->
+              <path d="M 175 193 Q 174 177 176 163 Q 178 153 184 155 Q 190 157 190 169 Q 190 181 188 193 Z" fill="url(#skin3)"/>
+              <!-- Ring -->
+              <path d="M 186 195 Q 186 180 188 169 Q 190 160 196 162 Q 202 164 201 175 Q 200 186 196 196 Z" fill="url(#skin3)"/>
+              <!-- Pinky -->
+              <path d="M 196 201 Q 197 189 199 180 Q 201 173 206 175 Q 211 177 210 185 Q 209 194 205 201 Z" fill="url(#skin3)"/>
+              <!-- knuckle lines -->
+              <path d="M 167 178 Q 170 176 173 178" stroke="#8A5020" stroke-width="0.8" fill="none" opacity="0.45"/>
+              <path d="M 178 176 Q 181 174 184 176" stroke="#8A5020" stroke-width="0.8" fill="none" opacity="0.45"/>
+              <path d="M 189 178 Q 192 176 195 178" stroke="#8A5020" stroke-width="0.8" fill="none" opacity="0.45"/>
+              <!-- nail highlight on index -->
+              <ellipse cx="172" cy="163" rx="4" ry="3" fill="#D8A080" opacity="0.4"/>
+
+              <!-- ── THE MATTLY PACKET (Charcoal) ── -->
+              <g filter="url(#softShadow3)" transform="rotate(-7 228 178)">
+                <!-- Main body — very dark -->
+                <rect x="188" y="118" width="90" height="130" rx="10" fill="url(#pkt3body)" stroke="#3A3430" stroke-width="0.5"/>
+                <!-- Top band — slightly different dark -->
+                <rect x="188" y="118" width="90" height="52" rx="10" fill="url(#pkt3top)"/>
+                <rect x="188" y="150" width="90" height="20" fill="url(#pkt3top)"/>
+                <!-- Gold foil accent stripe at top -->
+                <rect x="188" y="118" width="90" height="3" rx="1.5" fill="#C4A882" opacity="0.55"/>
+                <!-- Logo — clay/gold coloured on dark -->
+                <text x="233" y="146" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="14" fill="#C4A882" letter-spacing="1">Mattly</text>
+                <text x="233" y="157" text-anchor="middle" font-family="Arial,sans-serif" font-size="5.5" fill="rgba(196,168,130,0.65)" letter-spacing="2">THE CHARCOAL</text>
+                <!-- Charcoal texture dots pattern -->
+                <circle cx="205" cy="172" r="1.2" fill="#3A3430" opacity="0.8"/>
+                <circle cx="215" cy="178" r="1" fill="#3A3430" opacity="0.7"/>
+                <circle cx="225" cy="170" r="1.5" fill="#3A3430" opacity="0.7"/>
+                <circle cx="235" cy="176" r="1.2" fill="#3A3430" opacity="0.8"/>
+                <circle cx="245" cy="172" r="1" fill="#3A3430" opacity="0.7"/>
+                <circle cx="255" cy="178" r="1.5" fill="#3A3430" opacity="0.7"/>
+                <circle cx="265" cy="170" r="1.2" fill="#3A3430" opacity="0.8"/>
+                <!-- row 2 -->
+                <circle cx="210" cy="188" r="1" fill="#3A3430" opacity="0.6"/>
+                <circle cx="222" cy="184" r="1.5" fill="#3A3430" opacity="0.6"/>
+                <circle cx="233" cy="190" r="1.2" fill="#3A3430" opacity="0.6"/>
+                <circle cx="244" cy="184" r="1" fill="#3A3430" opacity="0.6"/>
+                <circle cx="256" cy="188" r="1.5" fill="#3A3430" opacity="0.6"/>
+                <!-- subtle texture lines -->
+                <line x1="198" y1="200" x2="268" y2="200" stroke="#3A3430" stroke-width="0.6" opacity="0.5"/>
+                <line x1="198" y1="210" x2="268" y2="210" stroke="#3A3430" stroke-width="0.6" opacity="0.4"/>
+                <!-- Clay/gold badge -->
+                <rect x="208" y="220" width="50" height="18" rx="9" fill="#C4A882" opacity="0.9"/>
+                <text x="233" y="232" text-anchor="middle" font-family="Arial,sans-serif" font-size="7.5" fill="#2A2420" font-weight="bold" letter-spacing="0.5">50 SHEETS</text>
+                <!-- gold foil bottom accent -->
+                <rect x="188" y="243" width="90" height="3" rx="1.5" fill="#C4A882" opacity="0.35"/>
+                <!-- very subtle side highlight -->
+                <rect x="188" y="118" width="5" height="130" rx="2.5" fill="rgba(255,255,255,0.05)"/>
+              </g>
+
+              <!-- Tag badge in SVG -->
+              <rect x="16" y="16" width="68" height="22" rx="11" fill="#2A2420" stroke="#C4A882" stroke-width="1"/>
+              <text x="50" y="31" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="#C4A882" letter-spacing="1">PREMIUM</text>
+            </svg>
+            <div class="product-card-tag tag-premium" style="display:none;">Premium</div>
           </div>
           <div class="product-card-body">
             <div class="product-card-name">The Charcoal</div>
