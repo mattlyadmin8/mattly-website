@@ -1,0 +1,2309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mattly — Blotting Papers Made for Indian Skin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --warm-white: #FDFAF7;
+      --cream: #F7F3EE;
+      --soft-pink: #F0E4D8;
+      --clay: #C4A882;
+      --clay-dark: #8B6F4E;
+      --accent: #B8714A;
+      --charcoal: #2A2420;
+      --muted: #9B8E84;
+      --green: #7A8C6E;
+      --green-light: #A8B89C;
+
+      --font-heading: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 40px;
+
+      --shadow-sm: 0 2px 12px rgba(42,36,32,0.06);
+      --shadow-md: 0 8px 32px rgba(42,36,32,0.10);
+      --shadow-lg: 0 20px 60px rgba(42,36,32,0.14);
+
+      --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--warm-white);
+      color: var(--charcoal);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* =============================================
+       UTILITY CLASSES
+    ============================================= */
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-heading);
+      line-height: 1.18;
+    }
+
+    p {
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* =============================================
+       NAVIGATION
+    ============================================= */
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(253, 250, 247, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(196, 168, 130, 0.15);
+      transition: box-shadow var(--transition);
+    }
+    #nav.scrolled {
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    /* Logo */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .nav-logo-mark {
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-logo-mark svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--warm-white);
+    }
+    .nav-logo-text {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      color: var(--charcoal);
+      letter-spacing: -0.01em;
+    }
+
+    /* Nav links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.9rem;
+      color: var(--clay-dark);
+      transition: color var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--accent);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* CTA button */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: var(--warm-white);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.88rem;
+      letter-spacing: 0.02em;
+      padding: 11px 22px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background var(--transition), transform 0.2s ease, box-shadow var(--transition);
+    }
+    .btn-primary:hover {
+      background: var(--clay-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(184, 113, 74, 0.3);
+    }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--charcoal);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.88rem;
+      padding: 11px 22px;
+      border-radius: 100px;
+      border: 1.5px solid var(--clay);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background var(--transition), border-color var(--transition), transform 0.2s ease;
+    }
+    .btn-secondary:hover {
+      background: var(--soft-pink);
+      border-color: var(--clay-dark);
+      transform: translateY(-1px);
+    }
+
+    /* Hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--charcoal);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* Mobile nav overlay */
+    .nav-mobile-overlay {
+      display: none;
+      position: fixed;
+      inset: 68px 0 0 0;
+      background: var(--warm-white);
+      padding: 32px;
+      flex-direction: column;
+      gap: 24px;
+      z-index: 99;
+    }
+    .nav-mobile-overlay.open { display: flex; }
+    .nav-mobile-overlay a {
+      font-family: var(--font-body);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      text-decoration: none;
+    }
+
+    /* =============================================
+       HERO SECTION
+    ============================================= */
+    #hero {
+      min-height: 100svh;
+      padding-top: 68px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--warm-white);
+    }
+
+    /* Animated background blobs */
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(72px);
+      opacity: 0.45;
+      pointer-events: none;
+      animation: blobDrift 12s ease-in-out infinite alternate;
+    }
+    .hero-blob-1 {
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, #F0E4D8 0%, transparent 70%);
+      top: -100px; left: -80px;
+      animation-delay: 0s;
+    }
+    .hero-blob-2 {
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, #C4A882 0%, transparent 70%);
+      top: 40%; right: 5%;
+      animation-delay: -4s;
+    }
+    .hero-blob-3 {
+      width: 280px; height: 280px;
+      background: radial-gradient(circle, #7A8C6E 0%, transparent 70%);
+      bottom: 80px; left: 35%;
+      animation-delay: -8s;
+      opacity: 0.2;
+    }
+
+    @keyframes blobDrift {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(20px, -30px) scale(1.06); }
+      100% { transform: translate(-10px, 20px) scale(0.96); }
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 64px;
+      position: relative;
+      z-index: 2;
+      padding: 80px 0;
+    }
+
+    .hero-content {}
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--soft-pink);
+      border: 1px solid var(--clay);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--clay-dark);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .hero-headline {
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      color: var(--charcoal);
+      margin-bottom: 20px;
+      line-height: 1.12;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 420px;
+      margin-bottom: 36px;
+      line-height: 1.8;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-social-proof {
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .proof-avatars {
+      display: flex;
+    }
+    .proof-avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: 2px solid var(--warm-white);
+      margin-left: -8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--warm-white);
+    }
+    .proof-avatar:first-child { margin-left: 0; }
+    .proof-avatar:nth-child(1) { background: var(--clay-dark); }
+    .proof-avatar:nth-child(2) { background: var(--accent); }
+    .proof-avatar:nth-child(3) { background: var(--green); }
+    .proof-text {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    .proof-text strong {
+      color: var(--charcoal);
+      font-weight: 600;
+    }
+
+    /* Hero Product Mockup */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .product-float {
+      animation: productBob 4s ease-in-out infinite;
+      position: relative;
+    }
+
+    @keyframes productBob {
+      0%, 100% { transform: translateY(0px) rotate(-2deg); }
+      50%       { transform: translateY(-18px) rotate(1deg); }
+    }
+
+    /* CSS Product illustration */
+    .product-mockup {
+      position: relative;
+      width: 280px;
+    }
+
+    /* Main packet */
+    .product-packet {
+      width: 220px;
+      height: 300px;
+      background: linear-gradient(145deg, #F7F3EE 0%, #F0E4D8 40%, #E8D5C4 100%);
+      border-radius: 20px 20px 16px 16px;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(42,36,32,0.18), 0 8px 24px rgba(42,36,32,0.10), inset 0 1px 0 rgba(255,255,255,0.6);
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .product-packet::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 90px;
+      background: linear-gradient(135deg, var(--clay-dark) 0%, var(--accent) 100%);
+      border-radius: 16px 16px 0 0;
+    }
+
+    /* Logo on packet */
+    .packet-logo {
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      color: var(--warm-white);
+      letter-spacing: 0.04em;
+      z-index: 2;
+      white-space: nowrap;
+    }
+
+    .packet-tagline {
+      position: absolute;
+      top: 58px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-body);
+      font-size: 0.5rem;
+      font-weight: 400;
+      color: rgba(253,250,247,0.7);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    /* Sheets fanning out */
+    .packet-sheets {
+      position: absolute;
+      top: 76px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+    }
+
+    .packet-sheet {
+      width: 100%;
+      height: 8px;
+      background: var(--warm-white);
+      border-radius: 2px;
+      margin-bottom: 3px;
+      opacity: 0.7;
+    }
+    .packet-sheet:nth-child(1) { opacity: 0.4; transform: rotate(-1deg); }
+    .packet-sheet:nth-child(2) { opacity: 0.55; }
+    .packet-sheet:nth-child(3) { opacity: 0.7; }
+
+    /* Info on packet */
+    .packet-info {
+      position: absolute;
+      bottom: 28px;
+      left: 0; right: 0;
+      text-align: center;
+    }
+    .packet-info-name {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--charcoal);
+      display: block;
+    }
+    .packet-info-count {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Floating elements around the mockup */
+    .float-badge {
+      position: absolute;
+      background: var(--warm-white);
+      border-radius: 12px;
+      box-shadow: var(--shadow-md);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .float-badge-1 {
+      top: 10px;
+      right: -10px;
+      animation: badgeFloat 5s ease-in-out infinite;
+      animation-delay: -1s;
+    }
+    .float-badge-2 {
+      bottom: 30px;
+      left: -20px;
+      animation: badgeFloat 5s ease-in-out infinite;
+      animation-delay: -3s;
+    }
+
+    @keyframes badgeFloat {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    .badge-icon {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+    .badge-icon.green  { background: rgba(122,140,110,0.12); }
+    .badge-icon.orange { background: rgba(184,113,74,0.12); }
+
+    .badge-text {
+      font-family: var(--font-body);
+      line-height: 1.3;
+    }
+    .badge-text strong {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      display: block;
+    }
+    .badge-text span {
+      font-size: 0.66rem;
+      color: var(--muted);
+    }
+
+    /* Confetti dots */
+    .hero-dot {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: dotPop 6s ease-in-out infinite;
+    }
+    .hero-dot-1 { width: 10px; height: 10px; background: var(--clay); top: 5%; right: 15%; animation-delay: 0s; }
+    .hero-dot-2 { width: 6px;  height: 6px;  background: var(--green); bottom: 20%; right: 8%; animation-delay: -2s; }
+    .hero-dot-3 { width: 14px; height: 14px; background: var(--soft-pink); top: 60%; left: 5%; animation-delay: -4s; }
+
+    @keyframes dotPop {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50%       { transform: scale(1.3); opacity: 0.8; }
+    }
+
+    /* =============================================
+       TRUST BAR / MARQUEE
+    ============================================= */
+    #trust {
+      background: var(--charcoal);
+      padding: 16px 0;
+      overflow: hidden;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 28s linear infinite;
+    }
+
+    @keyframes marqueeScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 40px;
+      white-space: nowrap;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--clay);
+    }
+
+    .marquee-sep {
+      width: 4px; height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* =============================================
+       OUR STORY
+    ============================================= */
+    #story {
+      padding: 112px 0;
+      background: var(--cream);
+    }
+
+    .story-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .story-content {}
+    .story-headline {
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+      color: var(--charcoal);
+      margin-bottom: 20px;
+    }
+    .story-headline em { color: var(--accent); }
+
+    .story-body {
+      font-size: 0.98rem;
+      margin-bottom: 16px;
+    }
+
+    .story-signature {
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .story-sig-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--clay-dark), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--warm-white);
+      font-style: italic;
+    }
+    .story-sig-text strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+    .story-sig-text span {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* Stat cards */
+    .story-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: var(--warm-white);
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(196,168,130,0.15);
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--accent);
+      border-radius: 0 2px 2px 0;
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform var(--transition);
+    }
+    .stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .stat-card:hover::before { transform: scaleY(1); }
+
+    .stat-number {
+      font-family: var(--font-heading);
+      font-size: 2.4rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    .stat-icon {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    /* =============================================
+       PRODUCT RANGE
+    ============================================= */
+    #products {
+      padding: 112px 0;
+      background: var(--warm-white);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .section-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--charcoal);
+      margin-bottom: 12px;
+    }
+    .section-header h2 em { color: var(--accent); }
+    .section-header p {
+      font-size: 1rem;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .product-card {
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(196,168,130,0.15);
+      transition: transform var(--transition), box-shadow var(--transition);
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .product-card-visual {
+      height: 260px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Product card visual - Original */
+    .product-card-visual.original {
+      background: linear-gradient(145deg, #F7F3EE 0%, #F0E4D8 100%);
+    }
+    /* Green Tea */
+    .product-card-visual.green-tea {
+      background: linear-gradient(145deg, #EFF3ED 0%, #D8E4D3 100%);
+    }
+    /* Charcoal */
+    .product-card-visual.charcoal-v {
+      background: linear-gradient(145deg, #3A3330 0%, #2A2420 100%);
+    }
+
+    /* Mini product illustration inside card */
+    .mini-packet {
+      width: 100px;
+      height: 140px;
+      border-radius: 12px 12px 10px 10px;
+      position: relative;
+      box-shadow: 0 16px 48px rgba(42,36,32,0.2);
+    }
+    .mini-packet.original-pkt {
+      background: linear-gradient(145deg, #F7F3EE, #E8D5C4);
+    }
+    .mini-packet.original-pkt::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 45px;
+      background: linear-gradient(135deg, #8B6F4E, #B8714A);
+      border-radius: 10px 10px 0 0;
+    }
+    .mini-packet.greentea-pkt {
+      background: linear-gradient(145deg, #EFF3ED, #D8E4D3);
+    }
+    .mini-packet.greentea-pkt::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 45px;
+      background: linear-gradient(135deg, #5A7252, #7A8C6E);
+      border-radius: 10px 10px 0 0;
+    }
+    .mini-packet.charcoal-pkt {
+      background: linear-gradient(145deg, #3A3330, #2A2420);
+    }
+    .mini-packet.charcoal-pkt::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 45px;
+      background: linear-gradient(135deg, #1A1510, #2A2420);
+      border-radius: 10px 10px 0 0;
+    }
+
+    .mini-packet-name {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      color: var(--warm-white);
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    /* floating dots around mini packets */
+    .card-dot {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.4;
+    }
+
+    .product-card-tag {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+    .tag-bestseller { background: var(--accent); color: var(--warm-white); }
+    .tag-new        { background: var(--green); color: var(--warm-white); }
+    .tag-premium    { background: var(--charcoal); color: var(--clay); }
+
+    .product-card-body {
+      padding: 24px 26px 28px;
+    }
+
+    .product-card-name {
+      font-family: var(--font-heading);
+      font-size: 1.22rem;
+      color: var(--charcoal);
+      margin-bottom: 4px;
+    }
+    .product-card-variant {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 12px;
+    }
+    .product-card-desc {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .product-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .product-card-price {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      color: var(--charcoal);
+    }
+    .product-card-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.8rem;
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+      padding: 8px 16px;
+      border-radius: 100px;
+      background: none;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+    }
+    .product-card-btn:hover {
+      background: var(--accent);
+      color: var(--warm-white);
+    }
+
+    /* =============================================
+       HOW IT WORKS
+    ============================================= */
+    #how {
+      padding: 112px 0;
+      background: var(--soft-pink);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #how::before {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(196,168,130,0.2), transparent 70%);
+      top: -100px; right: -100px;
+      border-radius: 50%;
+    }
+
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      position: relative;
+    }
+
+    /* Connecting line between steps */
+    .how-steps::before {
+      content: '';
+      position: absolute;
+      top: 44px;
+      left: calc(100% / 6);
+      width: calc(100% * 2/3);
+      height: 1px;
+      background: linear-gradient(to right, var(--clay) 0%, var(--clay) 100%);
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    .how-step {
+      background: var(--warm-white);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px 32px;
+      text-align: center;
+      transition: transform var(--transition), box-shadow var(--transition);
+      cursor: default;
+      position: relative;
+    }
+    .how-step:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+    }
+    .how-step:hover .step-icon-ring {
+      background: var(--accent);
+      color: var(--warm-white);
+      transform: scale(1.08);
+    }
+
+    .step-number {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .step-icon-ring {
+      width: 68px; height: 68px;
+      border-radius: 50%;
+      background: var(--soft-pink);
+      border: 2px solid var(--clay);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin: 0 auto 20px;
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+    }
+
+    .how-step h3 {
+      font-size: 1.15rem;
+      color: var(--charcoal);
+      margin-bottom: 10px;
+    }
+    .how-step p {
+      font-size: 0.88rem;
+    }
+
+    /* =============================================
+       INGREDIENTS
+    ============================================= */
+    #ingredients {
+      padding: 112px 0;
+      background: var(--charcoal);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #ingredients::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,113,74,0.08) 0%, transparent 70%);
+      top: -200px; left: -200px;
+    }
+
+    #ingredients .section-label { color: var(--clay); }
+    #ingredients .section-header h2 { color: var(--warm-white); }
+    #ingredients .section-header p   { color: var(--muted); }
+
+    .ingredients-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .ingredient-cell {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(196,168,130,0.12);
+      border-radius: var(--radius-md);
+      padding: 32px 24px;
+      text-align: center;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+    .ingredient-cell:hover {
+      background: rgba(184,113,74,0.08);
+      border-color: rgba(196,168,130,0.3);
+      transform: translateY(-4px);
+    }
+
+    .ingredient-icon {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: rgba(196,168,130,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 20px;
+      border: 1px solid rgba(196,168,130,0.15);
+    }
+
+    .ingredient-name {
+      font-family: var(--font-heading);
+      font-size: 1.08rem;
+      color: var(--clay);
+      margin-bottom: 10px;
+    }
+
+    .ingredient-desc {
+      font-size: 0.83rem;
+      color: rgba(155,142,132,0.85);
+      line-height: 1.7;
+    }
+
+    /* =============================================
+       REVIEWS
+    ============================================= */
+    #reviews {
+      padding: 112px 0;
+      background: var(--cream);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .review-card {
+      background: var(--warm-white);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      border: 1px solid rgba(196,168,130,0.15);
+      position: relative;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Big quote mark */
+    .review-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      font-family: var(--font-heading);
+      font-size: 5rem;
+      line-height: 1;
+      color: var(--soft-pink);
+    }
+
+    .review-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 16px;
+    }
+    .star {
+      font-size: 0.9rem;
+      color: var(--accent);
+    }
+
+    .review-quote {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1.75;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .author-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      color: var(--warm-white);
+      font-style: italic;
+      flex-shrink: 0;
+    }
+    .author-avatar.av1 { background: linear-gradient(135deg, #C4A882, #8B6F4E); }
+    .author-avatar.av2 { background: linear-gradient(135deg, #7A8C6E, #5A7252); }
+    .author-avatar.av3 { background: linear-gradient(135deg, #B8714A, #8B6F4E); }
+
+    .author-info strong {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+    .author-info span {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    /* Verified badge */
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.66rem;
+      font-weight: 500;
+      color: var(--green);
+      letter-spacing: 0.04em;
+      background: rgba(122,140,110,0.1);
+      border-radius: 100px;
+      padding: 2px 8px;
+      margin-top: 4px;
+    }
+
+    /* =============================================
+       WAITLIST
+    ============================================= */
+    #waitlist {
+      padding: 112px 0;
+      background: linear-gradient(135deg, #2A2420 0%, #3A3025 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #waitlist::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,113,74,0.12) 0%, transparent 70%);
+      bottom: -100px; right: -100px;
+    }
+    #waitlist::after {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(122,140,110,0.08) 0%, transparent 70%);
+      top: -50px; left: 10%;
+    }
+
+    .waitlist-inner {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    #waitlist .section-label { color: var(--clay); }
+
+    .waitlist-headline {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: var(--warm-white);
+      margin-bottom: 14px;
+    }
+    .waitlist-headline em { color: var(--clay); }
+
+    .waitlist-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 44px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .waitlist-form {
+      display: flex;
+      align-items: center;
+      max-width: 480px;
+      margin: 0 auto;
+      gap: 0;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(196,168,130,0.2);
+      border-radius: 100px;
+      padding: 6px 6px 6px 24px;
+    }
+
+    .waitlist-input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--warm-white);
+      width: 100%;
+    }
+    .waitlist-input::placeholder { color: rgba(155,142,132,0.6); }
+
+    .waitlist-submit {
+      background: var(--accent);
+      color: var(--warm-white);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.88rem;
+      border: none;
+      border-radius: 100px;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: background var(--transition), transform 0.2s ease;
+      flex-shrink: 0;
+    }
+    .waitlist-submit:hover {
+      background: var(--clay-dark);
+      transform: scale(1.02);
+    }
+
+    .waitlist-error {
+      font-size: 0.78rem;
+      color: #E8826A;
+      margin-top: 10px;
+      min-height: 18px;
+    }
+
+    /* Success state */
+    .waitlist-success {
+      display: none;
+      text-align: center;
+      animation: successPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+    @keyframes successPop {
+      0%   { opacity: 0; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .success-icon {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: rgba(122,140,110,0.15);
+      border: 2px solid var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 20px;
+    }
+    .waitlist-success h3 {
+      font-size: 1.6rem;
+      color: var(--warm-white);
+      margin-bottom: 10px;
+    }
+    .waitlist-success p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .waitlist-perks {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+    .waitlist-perk {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .waitlist-perk::before {
+      content: '✓';
+      width: 18px; height: 18px;
+      background: rgba(122,140,110,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      color: var(--green);
+      flex-shrink: 0;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    #footer {
+      background: var(--charcoal);
+      padding: 72px 0 32px;
+      border-top: 1px solid rgba(196,168,130,0.08);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(196,168,130,0.08);
+    }
+
+    .footer-brand {}
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .footer-logo-mark {
+      width: 28px; height: 28px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-logo-mark svg { width: 14px; height: 14px; fill: var(--warm-white); }
+    .footer-logo-text {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      color: var(--warm-white);
+    }
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 220px;
+      margin-bottom: 24px;
+    }
+
+    /* Social icons */
+    .footer-socials {
+      display: flex;
+      gap: 10px;
+    }
+    .social-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(196,168,130,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.85rem;
+      transition: background var(--transition), color var(--transition);
+    }
+    .social-icon:hover {
+      background: var(--accent);
+      color: var(--warm-white);
+      border-color: var(--accent);
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 20px;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-col ul a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--muted);
+      transition: color var(--transition);
+    }
+    .footer-col ul a:hover { color: var(--clay); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 28px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(155,142,132,0.5);
+    }
+    .footer-legal {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-legal a {
+      font-size: 0.78rem;
+      color: rgba(155,142,132,0.5);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .footer-legal a:hover { color: var(--muted); }
+
+    /* =============================================
+       RESPONSIVE — TABLET (≤900px)
+    ============================================= */
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 48px;
+      }
+      .hero-sub { max-width: 100%; }
+      .hero-ctas { justify-content: center; }
+      .hero-social-proof { justify-content: center; }
+      .hero-visual { order: -1; }
+
+      .story-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .products-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+
+      .how-steps {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .how-steps::before { display: none; }
+
+      .ingredients-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+
+      .reviews-grid { grid-template-columns: 1fr; gap: 16px; }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+      .footer-brand { grid-column: 1 / -1; }
+
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      .products-grid { grid-template-columns: 1fr; }
+    }
+
+    /* =============================================
+       RESPONSIVE — MOBILE (≤600px)
+    ============================================= */
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+
+      .hero-inner { padding: 60px 0; }
+      .hero-headline { font-size: 2rem; }
+
+      .story-stats { grid-template-columns: 1fr 1fr; }
+
+      .ingredients-grid { grid-template-columns: 1fr 1fr; }
+
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: auto; }
+
+      .waitlist-form {
+        flex-direction: column;
+        border-radius: var(--radius-md);
+        padding: 16px;
+        gap: 12px;
+      }
+      .waitlist-input {
+        width: 100%;
+        text-align: center;
+      }
+      .waitlist-submit {
+        width: 100%;
+        text-align: center;
+      }
+
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .float-badge-1, .float-badge-2 { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =============================================
+       NAVIGATION
+  ============================================= -->
+  <nav id="nav">
+    <div class="container">
+      <div class="nav-inner">
+
+        <!-- Logo -->
+        <a href="#hero" class="nav-logo">
+          <div class="nav-logo-mark">
+            <!-- Leaf-like SVG -->
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 1C8 1 3 4 3 9C3 12.3 5.2 14.5 8 15C10.8 14.5 13 12.3 13 9C13 4 8 1 8 1ZM8 3.5C8 3.5 7 7 7 9.5C7 11.1 7.4 12.2 8 13C8.6 12.2 9 11.1 9 9.5C9 7 8 3.5 8 3.5Z"/>
+            </svg>
+          </div>
+          <span class="nav-logo-text">Mattly</span>
+        </a>
+
+        <!-- Center links -->
+        <ul class="nav-links">
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+        </ul>
+
+        <!-- CTA -->
+        <a href="#waitlist" class="btn-primary nav-cta">Join Waitlist</a>
+
+        <!-- Mobile hamburger -->
+        <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile nav overlay -->
+  <div class="nav-mobile-overlay" id="mobileNav">
+    <a href="#story"      class="mobile-link">Our Story</a>
+    <a href="#products"   class="mobile-link">Products</a>
+    <a href="#how"        class="mobile-link">How It Works</a>
+    <a href="#ingredients" class="mobile-link">Ingredients</a>
+    <a href="#reviews"    class="mobile-link">Reviews</a>
+    <a href="#waitlist" class="btn-primary" style="text-align:center;">Join Waitlist →</a>
+  </div>
+
+  <!-- =============================================
+       HERO
+  ============================================= -->
+  <section id="hero">
+    <!-- Background blobs -->
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="hero-blob hero-blob-3"></div>
+
+    <!-- Decorative dots -->
+    <div class="hero-dot hero-dot-1"></div>
+    <div class="hero-dot hero-dot-2"></div>
+    <div class="hero-dot hero-dot-3"></div>
+
+    <div class="container">
+      <div class="hero-inner">
+
+        <!-- Left: Content -->
+        <div class="hero-content reveal">
+          <div class="hero-eyebrow">Launching in India 🌿</div>
+
+          <h1 class="hero-headline">
+            Blotting papers<br>made for <em>your</em><br>Indian skin.
+          </h1>
+
+          <p class="hero-sub">
+            Crafted from natural rice fibres, Mattly blotting papers absorb oil and shine—without disturbing your makeup or stripping your skin. Finally, a little moment of freshness that's entirely yours.
+          </p>
+
+          <div class="hero-ctas">
+            <a href="#waitlist" class="btn-primary">Join the Waitlist &rarr;</a>
+            <a href="#products" class="btn-secondary">Explore Range</a>
+          </div>
+
+          <!-- Social proof -->
+          <div class="hero-social-proof">
+            <div class="proof-avatars">
+              <div class="proof-avatar">P</div>
+              <div class="proof-avatar">A</div>
+              <div class="proof-avatar">S</div>
+            </div>
+            <p class="proof-text"><strong>2,400+</strong> women already on the waitlist</p>
+          </div>
+        </div>
+
+        <!-- Right: Floating product mockup -->
+        <div class="hero-visual reveal reveal-delay-2">
+          <div class="product-float">
+
+            <!-- Floating badges -->
+            <div class="float-badge float-badge-1">
+              <div class="badge-icon green">🌿</div>
+              <div class="badge-text">
+                <strong>100% Natural</strong>
+                <span>Rice fibre base</span>
+              </div>
+            </div>
+            <div class="float-badge float-badge-2">
+              <div class="badge-icon orange">✦</div>
+              <div class="badge-text">
+                <strong>3× Absorbent</strong>
+                <span>vs. regular sheets</span>
+              </div>
+            </div>
+
+            <!-- Main packet illustration -->
+            <div class="product-mockup">
+              <div class="product-packet">
+                <span class="packet-logo">Mattly</span>
+                <span class="packet-tagline">The Original</span>
+
+                <!-- Sheet layers -->
+                <div class="packet-sheets">
+                  <div class="packet-sheet"></div>
+                  <div class="packet-sheet"></div>
+                  <div class="packet-sheet"></div>
+                </div>
+
+                <!-- Bottom info -->
+                <div class="packet-info">
+                  <span class="packet-info-name">The Original</span>
+                  <span class="packet-info-count">50 Sheets · Rice Paper</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       TRUST BAR
+  ============================================= -->
+  <div id="trust">
+    <div class="marquee-track" id="marqueeTrack">
+      <!-- Items duplicated for seamless loop -->
+      <div class="marquee-item"><span class="marquee-sep"></span>100% Natural Fibres</div>
+      <div class="marquee-item"><span class="marquee-sep"></span>Cruelty Free</div>
+      <div class="marquee-item"><span class="marquee-sep"></span>Dermatologist Reviewed</div>
+      <div class="marquee-item"><span class="marquee-sep"></span>Biodegradable Packaging</div>
+      <div class="marquee-item"><span class="marquee-sep"></span>Made for Indian Skin</div>
+      <div class="marquee-item"><span class="marquee-sep"></span>No Harsh Chemicals</div>
+      <div class="marquee-item"><span class="marquee-sep"></span>Vegan Certified</div>
+      <!-- Duplicate for infinite scroll -->
+      <div class="marquee-item"><span class="marquee-sep"></span>100% Natural Fibres</div>
+      <div class="marquee-item"><span class="marquee-sep"></span>Cruelty Free</div>
+      <div class="marquee-item"><span class="marquee-sep"></span>Dermatologist Reviewed</div>
+      <div class="marquee-item"><span class="marquee-sep"></span>Biodegradable Packaging</div>
+      <div class="marquee-item"><span class="marquee-sep"></span>Made for Indian Skin</div>
+      <div class="marquee-item"><span class="marquee-sep"></span>No Harsh Chemicals</div>
+      <div class="marquee-item"><span class="marquee-sep"></span>Vegan Certified</div>
+    </div>
+  </div>
+
+  <!-- =============================================
+       OUR STORY
+  ============================================= -->
+  <section id="story">
+    <div class="container">
+      <div class="story-inner">
+
+        <!-- Left: Story -->
+        <div class="story-content reveal">
+          <span class="section-label">Our Story</span>
+          <h2 class="story-headline">
+            Born from the<br>frustration of <em>every</em><br>midday shine.
+          </h2>
+          <p class="story-body">
+            It started in a Mumbai summer. Humidity at 85%. Kajal sliding. Foundation patchy. And a packet of foreign blotting papers that smelled like chemicals and left a waxy film.
+          </p>
+          <p class="story-body">
+            Mattly was born from a simple question: <em>why doesn't a product like this exist for us?</em> Something that works with Indian skin—oilier in humidity, more melanin-rich, more diverse in texture—not against it.
+          </p>
+          <p class="story-body">
+            We spent 18 months developing a proprietary rice-fibre matrix with dermatologists. No parabens. No synthetic fragrance. No compromise.
+          </p>
+
+          <!-- Founder -->
+          <div class="story-signature">
+            <div class="story-sig-avatar">A</div>
+            <div class="story-sig-text">
+              <strong>Anika Sharma</strong>
+              <span>Founder, Mattly</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Stat cards -->
+        <div class="story-stats">
+          <div class="stat-card reveal reveal-delay-1">
+            <span class="stat-icon">📄</span>
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Sheets per pack — more than any competitor</div>
+          </div>
+          <div class="stat-card reveal reveal-delay-2">
+            <span class="stat-icon">💧</span>
+            <div class="stat-number">3×</div>
+            <div class="stat-label">More absorbent than standard blotting papers</div>
+          </div>
+          <div class="stat-card reveal reveal-delay-3">
+            <span class="stat-icon">🚫</span>
+            <div class="stat-number">0</div>
+            <div class="stat-label">Harsh chemicals, parabens, or synthetic fragrance</div>
+          </div>
+          <div class="stat-card reveal reveal-delay-4">
+            <span class="stat-icon">♻️</span>
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Biodegradable packaging, always</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       PRODUCT RANGE
+  ============================================= -->
+  <section id="products">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Product Range</span>
+        <h2>Choose your <em>formula.</em></h2>
+        <p>Every skin is different. Our range is designed to meet you where you are — from everyday freshness to deep detox.</p>
+      </div>
+
+      <div class="products-grid">
+
+        <!-- Card 1: The Original -->
+        <div class="product-card reveal reveal-delay-1">
+          <div class="product-card-visual original">
+            <div class="mini-packet original-pkt">
+              <span class="mini-packet-name">Mattly</span>
+            </div>
+            <!-- Floating dots -->
+            <div class="card-dot" style="width:10px;height:10px;background:#C4A882;top:20px;right:24px;"></div>
+            <div class="card-dot" style="width:6px;height:6px;background:#8B6F4E;bottom:24px;left:20px;"></div>
+            <div class="product-card-tag tag-bestseller">Bestseller</div>
+          </div>
+          <div class="product-card-body">
+            <div class="product-card-name">The Original</div>
+            <div class="product-card-variant">Rice Paper · 50 Sheets</div>
+            <p class="product-card-desc">Our hero formula. Pure, unbleached rice paper that lifts excess oil in one gentle press without disrupting your base. Soft, translucent, and completely residue-free.</p>
+            <div class="product-card-footer">
+              <div class="product-card-price">₹249</div>
+              <button class="product-card-btn">Notify Me →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: The Detox / Green Tea -->
+        <div class="product-card reveal reveal-delay-2">
+          <div class="product-card-visual green-tea">
+            <div class="mini-packet greentea-pkt">
+              <span class="mini-packet-name">Mattly</span>
+            </div>
+            <div class="card-dot" style="width:8px;height:8px;background:#7A8C6E;top:20px;right:24px;"></div>
+            <div class="card-dot" style="width:12px;height:12px;background:#A8B89C;bottom:24px;left:20px;opacity:0.5;"></div>
+            <div class="product-card-tag tag-new">New</div>
+          </div>
+          <div class="product-card-body">
+            <div class="product-card-name">The Detox</div>
+            <div class="product-card-variant">Green Tea Extract · 50 Sheets</div>
+            <p class="product-card-desc">Infused with EGCG-rich green tea extract for its natural antioxidant and sebum-regulating properties. Ideal for combination and acne-prone skin types.</p>
+            <div class="product-card-footer">
+              <div class="product-card-price">₹299</div>
+              <button class="product-card-btn">Notify Me →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: The Charcoal -->
+        <div class="product-card reveal reveal-delay-3">
+          <div class="product-card-visual charcoal-v">
+            <div class="mini-packet charcoal-pkt">
+              <span class="mini-packet-name" style="color:#C4A882;">Mattly</span>
+            </div>
+            <div class="card-dot" style="width:8px;height:8px;background:#C4A882;top:20px;right:24px;opacity:0.5;"></div>
+            <div class="card-dot" style="width:14px;height:14px;background:#8B6F4E;bottom:24px;left:20px;opacity:0.3;"></div>
+            <div class="product-card-tag tag-premium">Premium</div>
+          </div>
+          <div class="product-card-body">
+            <div class="product-card-name">The Charcoal</div>
+            <div class="product-card-variant">Activated Charcoal · 50 Sheets</div>
+            <p class="product-card-desc">Deep-pore action with activated charcoal that draws out impurities and absorbs excess oil like a magnet. For oily, congested, and city-worn skin.</p>
+            <div class="product-card-footer">
+              <div class="product-card-price">₹329</div>
+              <button class="product-card-btn">Notify Me →</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       HOW IT WORKS
+  ============================================= -->
+  <section id="how">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">How It Works</span>
+        <h2>Three seconds.<br><em>All-day</em> freshness.</h2>
+        <p>Blotting has never been simpler — or more effective.</p>
+      </div>
+
+      <div class="how-steps">
+
+        <div class="how-step reveal reveal-delay-1">
+          <span class="step-number">Step 01</span>
+          <div class="step-icon-ring">🤲</div>
+          <h3>Pull one sheet</h3>
+          <p>Each sheet is individually separated and ultra-thin — peel it away from the pack with one finger. No tearing, no mess.</p>
+        </div>
+
+        <div class="how-step reveal reveal-delay-2">
+          <span class="step-number">Step 02</span>
+          <div class="step-icon-ring">✨</div>
+          <h3>Press, don't rub</h3>
+          <p>Gently press the sheet against your T-zone or wherever you're shining. Hold for 2–3 seconds. Lift straight up — never drag.</p>
+        </div>
+
+        <div class="how-step reveal reveal-delay-3">
+          <span class="step-number">Step 03</span>
+          <div class="step-icon-ring">🌸</div>
+          <h3>Reveal fresh skin</h3>
+          <p>See the difference instantly. Oil is gone, makeup is intact, and your skin looks naturally matte — not powdered or flat.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       INGREDIENTS
+  ============================================= -->
+  <section id="ingredients">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">What's Inside</span>
+        <h2>Ingredients that <em>earn</em><br>their place.</h2>
+        <p>Every ingredient is chosen for a reason. Nothing synthetic. Nothing unnecessary.</p>
+      </div>
+
+      <div class="ingredients-grid">
+
+        <div class="ingredient-cell reveal reveal-delay-1">
+          <div class="ingredient-icon">🌾</div>
+          <div class="ingredient-name">Rice Paper</div>
+          <p class="ingredient-desc">Our base. Traditionally used in East Asian skincare, unbleached rice fibres create the ideal matrix for rapid oil absorption without a waxy or powdery residue.</p>
+        </div>
+
+        <div class="ingredient-cell reveal reveal-delay-2">
+          <div class="ingredient-icon">🍵</div>
+          <div class="ingredient-name">Green Tea Extract</div>
+          <p class="ingredient-desc">Rich in polyphenols and EGCG, green tea naturally regulates sebum and calms skin inflammation — making it ideal for the Detox variant.</p>
+        </div>
+
+        <div class="ingredient-cell reveal reveal-delay-3">
+          <div class="ingredient-icon">🖤</div>
+          <div class="ingredient-name">Activated Charcoal</div>
+          <p class="ingredient-desc">A powerful adsorbent that binds to excess oil, dirt, and pollutants — drawing them away from pores. City-skin's best friend.</p>
+        </div>
+
+        <div class="ingredient-cell reveal reveal-delay-4">
+          <div class="ingredient-icon">🏔️</div>
+          <div class="ingredient-name">Kaolin Clay</div>
+          <p class="ingredient-desc">The gentlest of clays, kaolin absorbs oil while soothing and smoothing the skin surface — never drying, never stripping.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       REVIEWS
+  ============================================= -->
+  <section id="reviews">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">What They're Saying</span>
+        <h2>Real skin. Real <em>results.</em></h2>
+        <p>From our beta testers who tried Mattly for 30 days straight.</p>
+      </div>
+
+      <div class="reviews-grid">
+
+        <!-- Review 1 -->
+        <div class="review-card reveal reveal-delay-1">
+          <div class="review-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <p class="review-quote">
+            I have oily combination skin and I used to reapply powder every two hours in summer. With Mattly, I just press one sheet and I'm good. It doesn't cake. It doesn't disturb my kajal. It actually works.
+          </p>
+          <div class="review-author">
+            <div class="author-avatar av1">P</div>
+            <div class="author-info">
+              <strong>Priya R.</strong>
+              <span>Mumbai, MH</span>
+              <div class="verified-badge">✓ Verified Beta Tester</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card reveal reveal-delay-2">
+          <div class="review-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <p class="review-quote">
+            I was sceptical because I've tried imported blotting papers and they always leave that silicone-y feeling. Mattly genuinely feels like nothing — in the best possible way. My skin just looks better.
+          </p>
+          <div class="review-author">
+            <div class="author-avatar av2">A</div>
+            <div class="author-info">
+              <strong>Ananya S.</strong>
+              <span>Bangalore, KA</span>
+              <div class="verified-badge">✓ Verified Beta Tester</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card reveal reveal-delay-3">
+          <div class="review-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <p class="review-quote">
+            The charcoal version is my holy grail for Hyderabad summers. It pulls out the oil and that little blackhead gunk too. I gave a pack to my sister and now she keeps asking me when the brand is launching officially.
+          </p>
+          <div class="review-author">
+            <div class="author-avatar av3">S</div>
+            <div class="author-info">
+              <strong>Sneha M.</strong>
+              <span>Hyderabad, TS</span>
+              <div class="verified-badge">✓ Verified Beta Tester</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       WAITLIST
+  ============================================= -->
+  <section id="waitlist">
+    <div class="container">
+      <div class="waitlist-inner">
+
+        <!-- Form state -->
+        <div id="waitlistFormState">
+          <span class="section-label">Early Access</span>
+          <h2 class="waitlist-headline reveal">
+            Be first. Get <em>rewarded.</em>
+          </h2>
+          <p class="waitlist-sub reveal reveal-delay-1">
+            Join the Mattly waitlist and get 20% off on launch day, plus early access to limited edition sets. No spam — ever.
+          </p>
+
+          <div class="reveal reveal-delay-2">
+            <div class="waitlist-form" id="waitlistForm">
+              <input
+                type="email"
+                class="waitlist-input"
+                id="waitlistEmail"
+                placeholder="your@email.com"
+                autocomplete="email"
+              />
+              <button class="waitlist-submit" id="waitlistSubmit">Secure My Spot →</button>
+            </div>
+            <div class="waitlist-error" id="waitlistError"></div>
+          </div>
+
+          <div class="waitlist-perks reveal reveal-delay-3">
+            <div class="waitlist-perk">20% launch discount</div>
+            <div class="waitlist-perk">Early access</div>
+            <div class="waitlist-perk">Free sample with first order</div>
+          </div>
+        </div>
+
+        <!-- Success state (hidden initially) -->
+        <div class="waitlist-success" id="waitlistSuccess">
+          <div class="success-icon">🌿</div>
+          <h3>You're on the list!</h3>
+          <p>We'll send you a launch reminder with your exclusive 20% off code.<br>Keep an eye on your inbox.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       FOOTER
+  ============================================= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-top">
+
+        <!-- Brand column -->
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-mark">
+              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 1C8 1 3 4 3 9C3 12.3 5.2 14.5 8 15C10.8 14.5 13 12.3 13 9C13 4 8 1 8 1ZM8 3.5C8 3.5 7 7 7 9.5C7 11.1 7.4 12.2 8 13C8.6 12.2 9 11.1 9 9.5C9 7 8 3.5 8 3.5Z"/>
+              </svg>
+            </div>
+            <span class="footer-logo-text">Mattly</span>
+          </div>
+          <p class="footer-tagline">
+            Natural blotting papers made with Indian skin in mind. Clean ingredients. Real results. No compromise.
+          </p>
+
+          <!-- Social icons -->
+          <div class="footer-socials">
+            <a href="#" class="social-icon" aria-label="Instagram" title="Instagram">
+              <!-- Instagram icon (SVG inline) -->
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Pinterest" title="Pinterest">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.76 1.22-5.17 1.22-5.17s-.31-.62-.31-1.55c0-1.45.84-2.54 1.89-2.54.89 0 1.32.67 1.32 1.47 0 .9-.57 2.24-.87 3.48-.25 1.04.52 1.88 1.54 1.88 1.85 0 3.1-2.37 3.1-5.18 0-2.14-1.44-3.64-3.5-3.64-2.38 0-3.78 1.79-3.78 3.64 0 .72.28 1.49.62 1.91.07.08.08.15.06.24-.06.26-.2.84-.23.95-.04.15-.13.18-.3.11-1.13-.52-1.83-2.18-1.83-3.51 0-2.85 2.07-5.47 5.97-5.47 3.13 0 5.57 2.23 5.57 5.21 0 3.11-1.96 5.61-4.67 5.61-.91 0-1.77-.47-2.06-1.03l-.56 2.1c-.2.78-.75 1.75-1.12 2.34.85.26 1.75.4 2.67.4 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="YouTube" title="YouTube">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Twitter/X" title="X (Twitter)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.632 5.905-5.632Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Products column -->
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="#products">The Original</a></li>
+            <li><a href="#products">The Detox</a></li>
+            <li><a href="#products">The Charcoal</a></li>
+            <li><a href="#waitlist">Gift Sets</a></li>
+            <li><a href="#waitlist">Bundle & Save</a></li>
+          </ul>
+        </div>
+
+        <!-- Company column -->
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#story">Our Story</a></li>
+            <li><a href="#ingredients">Ingredients</a></li>
+            <li><a href="#">Sustainability</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+
+        <!-- Support column -->
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Shipping & Returns</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Track Order</a></li>
+            <li><a href="#">Store Locator</a></li>
+          </ul>
+        </div>
+
+      </div><!-- /footer-top -->
+
+      <!-- Footer bottom -->
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Mattly Beauty Pvt. Ltd. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =============================================
+       JAVASCRIPT
+  ============================================= -->
+  <script>
+    /* ----- Sticky nav shadow on scroll ----- */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    /* ----- Mobile hamburger menu ----- */
+    const hamburger    = document.getElementById('hamburger');
+    const mobileNav    = document.getElementById('mobileNav');
+    let mobileOpen     = false;
+
+    hamburger.addEventListener('click', () => {
+      mobileOpen = !mobileOpen;
+      mobileNav.classList.toggle('open', mobileOpen);
+      // Animate bars
+      const bars = hamburger.querySelectorAll('span');
+      if (mobileOpen) {
+        bars[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+        bars[1].style.opacity   = '0';
+        bars[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+      } else {
+        bars[0].style.transform = '';
+        bars[1].style.opacity   = '';
+        bars[2].style.transform = '';
+      }
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-link, .nav-mobile-overlay .btn-primary').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileOpen = false;
+        mobileNav.classList.remove('open');
+        const bars = hamburger.querySelectorAll('span');
+        bars[0].style.transform = '';
+        bars[1].style.opacity   = '';
+        bars[2].style.transform = '';
+      });
+    });
+
+    /* ----- Intersection Observer for reveal animations ----- */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer  = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // animate once
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ----- Smooth scroll for all anchor links ----- */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          const navHeight = nav.offsetHeight;
+          const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 8;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    /* ----- Waitlist form validation + success state ----- */
+    const waitlistSubmit = document.getElementById('waitlistSubmit');
+    const waitlistEmail  = document.getElementById('waitlistEmail');
+    const waitlistError  = document.getElementById('waitlistError');
+    const waitlistFormState = document.getElementById('waitlistFormState');
+    const waitlistSuccess   = document.getElementById('waitlistSuccess');
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+    }
+
+    waitlistSubmit.addEventListener('click', () => {
+      const email = waitlistEmail.value.trim();
+
+      if (!email) {
+        waitlistError.textContent = 'Please enter your email address.';
+        waitlistEmail.focus();
+        return;
+      }
+      if (!isValidEmail(email)) {
+        waitlistError.textContent = 'That doesn\'t look like a valid email. Please try again.';
+        waitlistEmail.focus();
+        return;
+      }
+
+      waitlistError.textContent = '';
+      waitlistSubmit.textContent = 'Joining...';
+      waitlistSubmit.disabled = true;
+
+      // Simulate async submission
+      setTimeout(() => {
+        waitlistFormState.style.display = 'none';
+        waitlistSuccess.style.display   = 'block';
+      }, 800);
+    });
+
+    // Allow submit on Enter key
+    waitlistEmail.addEventListener('keydown', e => {
+      if (e.key === 'Enter') waitlistSubmit.click();
+    });
+
+    // Clear error on typing
+    waitlistEmail.addEventListener('input', () => {
+      waitlistError.textContent = '';
+    });
+
+    /* ----- Product card "Notify Me" buttons -> scroll to waitlist ----- */
+    document.querySelectorAll('.product-card-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const waitlist = document.getElementById('waitlist');
+        const navHeight = nav.offsetHeight;
+        const top = waitlist.getBoundingClientRect().top + window.scrollY - navHeight - 8;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    });
+
+    /* ----- Pause marquee on hover ----- */
+    const marqueeTrack = document.getElementById('marqueeTrack');
+    marqueeTrack.addEventListener('mouseenter', () => {
+      marqueeTrack.style.animationPlayState = 'paused';
+    });
+    marqueeTrack.addEventListener('mouseleave', () => {
+      marqueeTrack.style.animationPlayState = 'running';
+    });
+  </script>
+
+</body>
+</html>
