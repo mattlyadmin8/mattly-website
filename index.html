@@ -4,6 +4,64 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mattly — Blotting Papers Made for Indian Skin</title>
+
+  <!-- ── SEO Meta Tags ── -->
+  <meta name="description" content="Mattly blotting papers are made for Indian skin — 100% natural rice fibre, cruelty-free, and dermatologist reviewed. Absorb oil without disturbing your makeup. Shop The Original, The Detox & The Charcoal." />
+  <meta name="keywords" content="blotting papers India, oil blotting sheets, Indian skincare, rice paper blotting, mattly, natural blotting papers, oily skin India" />
+  <meta name="author" content="Mattly" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://mattly.co.in/" />
+
+  <!-- ── Open Graph (WhatsApp, Facebook, LinkedIn previews) ── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://mattly.co.in/" />
+  <meta property="og:title"       content="Mattly — Blotting Papers Made for Indian Skin" />
+  <meta property="og:description" content="100% natural rice fibre blotting papers made for Indian skin. Absorb oil, keep your makeup intact. Shop The Original, The Detox & The Charcoal — starting at ₹249." />
+  <meta property="og:image"       content="https://mattly.co.in/og-image.jpg" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale"      content="en_IN" />
+  <meta property="og:site_name"   content="Mattly" />
+
+  <!-- ── Twitter / X Card ── -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Mattly — Blotting Papers Made for Indian Skin" />
+  <meta name="twitter:description" content="100% natural rice fibre blotting papers made for Indian skin. Starting at ₹249." />
+  <meta name="twitter:image"       content="https://mattly.co.in/og-image.jpg" />
+
+  <!-- ── Favicon (SVG inline data URI — no extra file needed) ── -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23B8714A'/><path d='M16 4C16 4 9 8 9 15C9 19.4 11.8 22.6 16 23.5C20.2 22.6 23 19.4 23 15C23 8 16 4 16 4ZM16 8C16 8 14 13 14 16.5C14 18.6 14.8 20.1 16 21C17.2 20.1 18 18.6 18 16.5C18 13 16 8 16 8Z' fill='white'/></svg>" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23B8714A'/><path d='M16 4C16 4 9 8 9 15C9 19.4 11.8 22.6 16 23.5C20.2 22.6 23 19.4 23 15C23 8 16 4 16 4ZM16 8C16 8 14 13 14 16.5C14 18.6 14.8 20.1 16 21C17.2 20.1 18 18.6 18 16.5C18 13 16 8 16 8Z' fill='white'/></svg>" />
+
+  <!-- ── Theme colour (Android Chrome tab bar) ── -->
+  <meta name="theme-color" content="#B8714A" />
+
+  <!-- ── Structured Data (Google Rich Results) ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Mattly",
+    "url": "https://mattly.co.in",
+    "logo": "https://mattly.co.in/og-image.jpg",
+    "description": "Natural blotting papers made for Indian skin.",
+    "contactPoint": { "@type": "ContactPoint", "contactType": "customer service", "email": "hello@mattly.co.in" },
+    "sameAs": []
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Mattly Blotting Papers",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "The Original — Rice Paper Blotting Sheets", "url": "https://mattly.co.in/#products" },
+      { "@type": "ListItem", "position": 2, "name": "The Detox — Green Tea Blotting Sheets",    "url": "https://mattly.co.in/#products" },
+      { "@type": "ListItem", "position": 3, "name": "The Charcoal — Activated Charcoal Sheets", "url": "https://mattly.co.in/#products" }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -2022,21 +2080,6 @@
       .footer-top { grid-template-columns: 1fr; }
       .footer-brand { grid-column: auto; }
 
-      .waitlist-form {
-        flex-direction: column;
-        border-radius: var(--radius-md);
-        padding: 16px;
-        gap: 12px;
-      }
-      .waitlist-input {
-        width: 100%;
-        text-align: center;
-      }
-      .waitlist-submit {
-        width: 100%;
-        text-align: center;
-      }
-
       .hero-ctas { flex-direction: column; align-items: center; }
       .float-badge-1, .float-badge-2 { display: none; }
     }
@@ -2089,12 +2132,11 @@
 
   <!-- Mobile nav overlay -->
   <div class="nav-mobile-overlay" id="mobileNav">
-    <a href="#story"      class="mobile-link">Our Story</a>
-    <a href="#products"   class="mobile-link">Products</a>
-    <a href="#how"        class="mobile-link">How It Works</a>
+    <a href="#story"       class="mobile-link">Our Story</a>
+    <a href="#products"    class="mobile-link">Products</a>
+    <a href="#how"         class="mobile-link">How It Works</a>
     <a href="#ingredients" class="mobile-link">Ingredients</a>
-    <a href="#reviews"    class="mobile-link">Reviews</a>
-    <a href="#waitlist" class="btn-primary" style="text-align:center;display:none;">Join Waitlist →</a>
+    <a href="#reviews"     class="mobile-link">Reviews</a>
     <a href="#products" class="btn-primary" style="text-align:center;">Shop Now →</a>
   </div>
 
@@ -2117,7 +2159,7 @@
 
         <!-- Left: Content -->
         <div class="hero-content reveal">
-          <div class="hero-eyebrow">Launching in India 🌿</div>
+          <div class="hero-eyebrow">Now Live in India 🌿</div>
 
           <h1 class="hero-headline">
             Blotting papers<br>made for <em>your</em><br>Indian skin.
@@ -2128,8 +2170,8 @@
           </p>
 
           <div class="hero-ctas">
-            <a href="#waitlist" class="btn-primary">Join the Waitlist &rarr;</a>
-            <a href="#products" class="btn-secondary">Explore Range</a>
+            <a href="#products" class="btn-primary">Shop Now &rarr;</a>
+            <a href="#story" class="btn-secondary">Our Story</a>
           </div>
 
           <!-- Social proof -->
@@ -2139,7 +2181,7 @@
               <div class="proof-avatar">A</div>
               <div class="proof-avatar">S</div>
             </div>
-            <p class="proof-text"><strong>2,400+</strong> women already on the waitlist</p>
+            <p class="proof-text"><strong>2,400+</strong> women on our early access list</p>
           </div>
         </div>
 
@@ -3325,7 +3367,7 @@
 
       <!-- Footer bottom -->
       <div class="footer-bottom">
-        <p class="footer-copy">© 2025 Mattly Beauty Pvt. Ltd. All rights reserved.</p>
+        <p class="footer-copy">© 2026 Mattly. All rights reserved.</p>
         <div class="footer-legal">
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Use</a>
@@ -3352,7 +3394,7 @@
         tagClass: 'tag-bestseller',
         tagStyle: 'background:#B8714A;color:#FDFAF7;',
         price: 249,
-        rating: '4.9 · 312 reviews',
+        rating: '4.9 · Verified Beta Testers',
         emoji: '🌾',
         bgColor: 'linear-gradient(145deg,#F7F3EE,#EDD9C8)',
         bundles: [
@@ -3389,7 +3431,7 @@
         tagClass: 'tag-new',
         tagStyle: 'background:#7A8C6E;color:#FDFAF7;',
         price: 299,
-        rating: '4.8 · 187 reviews',
+        rating: '4.8 · Verified Beta Testers',
         emoji: '🍵',
         bgColor: 'linear-gradient(145deg,#EEF3EC,#D4E0CE)',
         bundles: [
@@ -3426,7 +3468,7 @@
         tagClass: 'tag-premium',
         tagStyle: 'background:#2A2420;color:#C4A882;border:1px solid #C4A882;',
         price: 329,
-        rating: '4.9 · 241 reviews',
+        rating: '4.9 · Verified Beta Testers',
         emoji: '🖤',
         bgColor: 'linear-gradient(145deg,#2E2825,#1E1A18)',
         bundles: [
